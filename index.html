@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lifetime Exploration Banner</title>
+    <style>
+        /* Base page styling */
+        body {
+            background-color: #ADD8E6; /* Light blue background as seen in the prompt */
+            font-family: sans-serif;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* The main banner styling */
+        #banner {
+            background-color: #FFFFE0; /* Cream/yellow banner */
+            border: 2px solid #333;
+            padding: 20px;
+            width: 100%;
+            max-width: 700px;
+            margin-bottom: 20px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+        }
+
+        #listTitle {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        #exploreList {
+            list-style-type: disc;
+            padding-left: 25px;
+        }
+
+        /* Controls styling */
+        .controls {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            flex-grow: 1;
+            border: 1px solid #ccc;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 10px 15px;
+            cursor: pointer;
+            border: 1px solid #999;
+            background-color: #efefef;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background-color: #ddd;
+        }
+
+        /* Navigation Buttons to other pages */
+        .nav-section {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .nav-btn:hover {
+            background-color: #357ABD;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Activity Banner -->
+    <div id="banner">
+        <p id="listTitle">Hi there! I'm Ken and I want to...</p>
+        <ul id="exploreList">
+            <!-- Items added via script -->
+        </ul>
+    </div>
+
+    <!-- Controls for the list -->
+    <div class="controls">
+        <div class="input-group">
+            <label for="newItemInput">Add New:</label>
+            <input type="text" id="newItemInput" placeholder="Enter new hobby item...">
+        </div>
+        <div class="button-group">
+            <button id="addBtn">Add new item on the list</button>
+            <button id="fontBtn">Change font family</button>
+            <button id="boldBtn">Make items appear bold</button>
+        </div>
+    </div>
+
+    <!-- Navigation to other activities -->
+    <div class="nav-section">
+        <a href="bibleverse.html" class="nav-btn">Bible Verse Design</a>
+        <a href="input.html" class="nav-btn">Username/Password Input</a>
+    </div>
+
+    <script>
+        /**
+         * INITIAL DATA
+         */
+        let exploreItems = [
+            "Master a musical instrument (classical guitar)",
+            "Learn a new language fluently (e.g., Japanese)",
+            "Publish a collection of original poetry",
+            "Get a scuba certification and explore a coral reef"
+            ];
+
+        const fonts = ["sans-serif", "serif", "monospace", "cursive"];
+        let currentFontIndex = 0;
+        let isBold = false;
+
+        // DOM Elements
+        const listContainer = document.getElementById('exploreList');
+        const inputField = document.getElementById('newItemInput');
+        const addBtn = document.getElementById('addBtn');
+        const fontBtn = document.getElementById('fontBtn');
+        const boldBtn = document.getElementById('boldBtn');
+
+        /**
+         * RENDER FUNCTION
+         * Updates the list based on current state variables
+         */
+        function render() {
+            listContainer.innerHTML = '';
+            
+            exploreItems.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                // Apply current styles
+                li.style.fontFamily = fonts[currentFontIndex];
+                li.style.fontWeight = isBold ? 'bold' : 'normal';
+                listContainer.appendChild(li);
+            });
+        }
+
+        /**
+         * EVENT HANDLERS
+         */
+        
+        // 1. Add new item
+        addBtn.onclick = () => {
+            const val = inputField.value.trim();
+            if (val) {
+                exploreItems.push(val);
+                inputField.value = '';
+                render();
+            }
+        };
+
+        // 2. Cycle Font Family
+        fontBtn.onclick = () => {
+            currentFontIndex = (currentFontIndex + 1) % fonts.length;
+            render();
+        };
+
+        // 3. Toggle Bold
+        boldBtn.onclick = () => {
+            isBold = !isBold;
+            render();
+        };
+
+        // Initialize display
+        render();
+    </script>
+</body>
+</html>

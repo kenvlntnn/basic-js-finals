@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible Verse Design</title>
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Default container styling */
+        .verse-card {
+            width: 80%;
+            max-width: 500px;
+            padding: 40px;
+            text-align: center;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            transition: all 0.6s ease;
+        }
+
+        .verse-text {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .verse-ref {
+            font-style: italic;
+            color: #555;
+        }
+
+        /* BIBLICAL DESIGN CLASS */
+        .biblical-design {
+            /* Parchment color background */
+            background-color: #fdf5e6; 
+            /* Double border suggestive of old scrolls/books */
+            border: 12px double #8b4513; 
+            color: #4e342e;
+            /* Serif font for classic biblical feel */
+            font-family: 'Georgia', 'Times New Roman', serif;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border-radius: 0; /* Remove rounding for scroll look */
+        }
+
+        .biblical-design .verse-text {
+            font-weight: bold;
+        }
+
+        .biblical-design .verse-ref {
+            color: #8b4513;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .btn-container {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid #333;
+            background: #fff;
+        }
+
+        button:hover {
+            background: #eee;
+        }
+
+        .home-link {
+            margin-top: 50px;
+            text-decoration: none;
+            color: #4A90E2;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="card" class="verse-card">
+        <p class="verse-text">"For I know the plans I have for you," declares the Lord, "plans to prosper you and not to harm you, plans to give you hope and a future."</p>
+        <p class="verse-ref">Jeremiah 29:11</p>
+    </div>
+
+    <div class="btn-container">
+        <!-- Button to add design (change font and change background) -->
+        <button id="addDesignBtn">Add Design</button>
+        <!-- Button to remove design and change it back to default -->
+        <button id="removeDesignBtn">Remove Design</button>
+    </div>
+
+    <a href="index.html" class="home-link">← Back to Main Page</a>
+
+    <script>
+        const card = document.getElementById('card');
+        const addBtn = document.getElementById('addDesignBtn');
+        const removeBtn = document.getElementById('removeDesignBtn');
+
+        // Apply biblical design class
+        addBtn.onclick = () => {
+            card.classList.add('biblical-design');
+        };
+
+        // Revert to default by removing the class
+        removeBtn.onclick = () => {
+            card.classList.remove('biblical-design');
+        };
+    </script>
+</body>
+</html>
